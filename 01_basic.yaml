@@ -33,91 +33,7 @@ paths:
                 minItems: 1
                 maxItems: 100
                 items:
-                  type: object
-                  description: Customer object
-                  properties:
-                    id:
-                      type: string
-                      format: uuid
-                    firstName:
-                      type: string
-                      minLength: 2
-                      maxLength: 100
-                      example: John
-                    lastName:
-                      type: string
-                      minLength: 2
-                      maxLength: 100
-                      example: Doe
-                    address:
-                      type: object
-                      properties:
-                        line1:
-                          type: string
-                          example: 123 Main St
-                        city:
-                          type: string
-                          example: Anytown
-                        stateCode:
-                          type: string
-                          minLength: 2
-                          maxLength: 2
-                          description: 2 letter state code
-                          # enum: [AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY]
-                          enum:
-                            - AL
-                            - AK
-                            - AZ
-                            - AR
-                            - CA
-                            - CO
-                            - CT
-                            - DE
-                            - FL
-                            - GA
-                            - HI
-                            - ID
-                            - IL
-                            - IN
-                            - IA
-                            - KS
-                            - KY
-                            - LA
-                            - ME
-                            - MD
-                            - MA
-                            - MI
-                            - MN
-                            - MS
-                            - MO
-                            - MT
-                            - NE
-                            - NV
-                            - NH
-                            - NJ
-                            - NM
-                            - NY
-                            - NC
-                            - ND
-                            - OH
-                            - OK
-                            - OR
-                            - PA
-                            - RI
-                            - SC
-                            - SD
-                            - TN
-                            - TX
-                            - UT
-                            - VT
-                            - VA
-                            - WA
-                            - WV
-                            - WI
-                            - WY
-                        zipCode:
-                          type: string
-                          example: 12345
+                  $ref: "#/components/schemas/Customer"
   /v1/beers:
     get:
       responses:
@@ -169,3 +85,93 @@ paths:
                               example: CA
         "404":
           description: No beers found
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+          example: 123 Main St
+        city:
+          type: string
+          example: Anytown
+        stateCode:
+          type: string
+          minLength: 2
+          maxLength: 2
+          description: 2 letter state code
+          # enum: [AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY]
+          enum:
+            - AL
+            - AK
+            - AZ
+            - AR
+            - CA
+            - CO
+            - CT
+            - DE
+            - FL
+            - GA
+            - HI
+            - ID
+            - IL
+            - IN
+            - IA
+            - KS
+            - KY
+            - LA
+            - ME
+            - MD
+            - MA
+            - MI
+            - MN
+            - MS
+            - MO
+            - MT
+            - NE
+            - NV
+            - NH
+            - NJ
+            - NM
+            - NY
+            - NC
+            - ND
+            - OH
+            - OK
+            - OR
+            - PA
+            - RI
+            - SC
+            - SD
+            - TN
+            - TX
+            - UT
+            - VT
+            - VA
+            - WA
+            - WV
+            - WI
+            - WY
+        zipCode:
+          type: string
+          example: 12345
+    Customer:
+      type: object
+      description: Customer object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: John
+        lastName:
+          type: string
+          minLength: 2
+          maxLength: 100
+          example: Doe
+        address:
+          $ref: "#/components/schemas/Address"
