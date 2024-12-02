@@ -36,6 +36,9 @@ paths:
                   type: object
                   description: Customer object
                   properties:
+                    id:
+                      type: string
+                      format: uuid
                     firstName:
                       type: string
                       minLength: 2
