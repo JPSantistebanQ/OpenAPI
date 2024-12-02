@@ -1,0 +1,41 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Basic API
+  description: A basic API with specifications for a pet store
+  termsOfService: http://example.com/terms/
+  contact:
+    name: API Support
+    url: http://www.example.com/support
+    email: email@me.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://dev.example.com
+    description: Development server
+  - url: https://staging.example.com
+    description: Staging server
+  - url: https://api.example.com
+    description: Production server
+paths:
+  /v1/customers:
+    get:
+      summary: Get all customers
+      description: Get all customers from the database
+      responses:
+        '200':
+          description: A list of customers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /v1/beers:
+    get:
+      responses:
+        '200':
+          description: A list of beers
+        '404':
+          description: No beers found
