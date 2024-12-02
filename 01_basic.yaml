@@ -29,11 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                minItems: 1
-                maxItems: 100
-                items:
-                  $ref: "#/components/schemas/Customer"
+                $ref: "#/components/schemas/CustomerList"
   /v1/beers:
     get:
       responses:
@@ -175,3 +171,9 @@ components:
           example: Doe
         address:
           $ref: "#/components/schemas/Address"
+    CustomerList:
+      type: array
+      minItems: 1
+      maxItems: 100
+      items:
+        $ref: "#/components/schemas/Customer"
