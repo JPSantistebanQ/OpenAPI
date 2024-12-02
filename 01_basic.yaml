@@ -123,5 +123,49 @@ paths:
       responses:
         "200":
           description: A list of beers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    name:
+                      type: string
+                      example: IPA
+                    style:
+                      type: string
+                      enum:
+                        - Ale
+                        - Lager
+                        - Pilsner
+                        - Stout
+                        - Porter
+                        - Wheat
+                        - Sour
+                        - Cider
+                      #example: Ale
+                    upc:
+                      type: string
+                      #example: 1234567890
+                    brewery:
+                      type: object
+                      #example: Sierra Nevada
+                      properties:
+                        name:
+                          type: string
+                          example: Sierra Nevada
+                        location:
+                          type: object
+                          properties:
+                            city:
+                              type: string
+                              example: Chico
+                            state:
+                              type: string
+                              example: CA
         "404":
           description: No beers found
