@@ -38,47 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      format: uuid
-                    name:
-                      type: string
-                      example: IPA
-                    style:
-                      type: string
-                      enum:
-                        - Ale
-                        - Lager
-                        - Pilsner
-                        - Stout
-                        - Porter
-                        - Wheat
-                        - Sour
-                        - Cider
-                      #example: Ale
-                    upc:
-                      type: string
-                      #example: 1234567890
-                    brewery:
-                      type: object
-                      #example: Sierra Nevada
-                      properties:
-                        name:
-                          type: string
-                          example: Sierra Nevada
-                        location:
-                          type: object
-                          properties:
-                            city:
-                              type: string
-                              example: Chico
-                            state:
-                              type: string
-                              example: CA
+                $ref: "#/components/schemas/BeerPagedList"
         "404":
           description: No beers found
 components:
@@ -177,3 +137,74 @@ components:
       maxItems: 100
       items:
         $ref: "#/components/schemas/Customer"
+    PageResponse:
+      type: object
+      properties:
+          pageable:
+            type: object
+            properties:
+              sort:
+                type: object
+                properties:
+                  sorted:
+                    type: boolean
+                  unsorted:
+                    type: boolean
+              offset:
+                type: integer
+              pageNumber:
+                type: integer
+              pageSize:
+                type: integer
+              paged:
+                type: boolean
+              unpaged:
+                type: boolean
+          totalPages:
+            type: integer
+            format: int32
+    BeerPagedList:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/PageResponse"
+        - properties:
+            content:
+                $ref: "#/components/schemas/BeerList"
+    BeerList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Beer"
+    Beer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: IPA
+        style:
+          type: string
+          enum:
+            - Ale
+            - Lager
+            - P Pilsner
+            - Stout
+            - Porter
+            - Wheat
+            - Sour
+            - Cider
+        upc:
+          type: string
+        brewery:
+          type: object
+          properties:
+            name:
+              type: string
+            location:
+              type: object
+              properties:
+                city:
+                  type: string
+                state:
+                  type: string
